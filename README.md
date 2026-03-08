@@ -52,7 +52,7 @@ jpgcli chart data.csv --prompt "自选角度生成一张组会使用的图片"
 jpgcli chart experiment.xlsx --sheet Sheet1 --prompt "比较不同实验组结果，生成适合组会展示的科研风格图"
 ```
 
-# 示例
+## 示例
 
 提示词：
 
