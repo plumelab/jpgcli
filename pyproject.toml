@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jpgcli"
+version = "0.1.0"
+description = "Generate research-style charts from tabular data with an AI-guided CLI."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "matplotlib>=3.8",
+  "openai>=1.40.0",
+  "openpyxl>=3.1",
+  "pandas>=2.2",
+  "pydantic>=2.7",
+  "python-dotenv>=1.0",
+  "seaborn>=0.13",
+  "typer>=0.12",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.2",
+]
+
+[project.scripts]
+jpgcli = "jpgcli.cli.app:app"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

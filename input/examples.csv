@@ -1,0 +1,19 @@
+sample_id,plant_variety,treatment,replicate,days_after_treatment,leaf_position,fresh_weight_g,extract_volume_ml,wavelength_nm,od_value,sod_activity_u_g_fw,operator,notes
+LS001,Arabidopsis WT,Control,1,0,Upper,0.203,5,560,0.812,118.4,Chen,Baseline sample
+LS002,Arabidopsis WT,Control,2,0,Upper,0.198,5,560,0.798,115.9,Chen,Baseline sample
+LS003,Arabidopsis WT,Control,3,0,Upper,0.205,5,560,0.821,120.3,Chen,Baseline sample
+LS004,Arabidopsis WT,Drought,1,3,Upper,0.194,5,560,0.735,132.7,Chen,Mild wilting observed
+LS005,Arabidopsis WT,Drought,2,3,Upper,0.201,5,560,0.721,136.1,Chen,Mild wilting observed
+LS006,Arabidopsis WT,Drought,3,3,Upper,0.197,5,560,0.742,130.8,Chen,Mild wilting observed
+LS007,Arabidopsis WT,NaCl,1,3,Upper,0.200,5,560,0.754,128.6,Chen,Salt stress group
+LS008,Arabidopsis WT,NaCl,2,3,Upper,0.196,5,560,0.748,129.9,Chen,Salt stress group
+LS009,Arabidopsis WT,NaCl,3,3,Upper,0.199,5,560,0.761,127.5,Chen,Salt stress group
+LS010,Mutant line A,Control,1,0,Upper,0.207,5,560,0.826,121.1,Wang,Baseline sample
+LS011,Mutant line A,Control,2,0,Upper,0.204,5,560,0.819,119.7,Wang,Baseline sample
+LS012,Mutant line A,Control,3,0,Upper,0.208,5,560,0.831,122.4,Wang,Baseline sample
+LS013,Mutant line A,Drought,1,3,Upper,0.193,5,560,0.689,145.8,Wang,Clear leaf curling
+LS014,Mutant line A,Drought,2,3,Upper,0.195,5,560,0.701,142.2,Wang,Clear leaf curling
+LS015,Mutant line A,Drought,3,3,Upper,0.191,5,560,0.676,148.1,Wang,Clear leaf curling
+LS016,Mutant line A,NaCl,1,3,Upper,0.198,5,560,0.718,138.6,Wang,Salt stress group
+LS017,Mutant line A,NaCl,2,3,Upper,0.202,5,560,0.726,136.9,Wang,Salt stress group
+LS018,Mutant line A,NaCl,3,3,Upper,0.197,5,560,0.713,139.8,Wang,Salt stress group
