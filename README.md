@@ -2,6 +2,8 @@
 
 `jpgcli` 是一个面向组会、周报和阶段汇报的科研风格图表 CLI。给它一份 `CSV / Excel` 数据和一句自然语言提示词，它会自动生成适合放进 PPT 的图表图片。
 
+a CLI tool for generating research-style charts for meetings and reports.
+Give it a CSV / Excel file and a natural language prompt, and it will generate a chart image ready for PPT.
 
 ## 环境与依赖
 
@@ -24,15 +26,15 @@ python3 -m pip install -e .
 python3 -m pip install -e '.[dev]'
 ```
 
-## 使用方法
+## 使用方法 / Usage
 
-首次使用先初始化：
+首次使用先初始化/Initialization：
 
 ```bash
 jpgcli init
 ```
 
-日常最推荐直接交互式生成：
+日常最推荐直接交互式生成/Interactive generation：
 
 ```bash
 jpgcli chart
@@ -52,12 +54,14 @@ jpgcli chart data.csv --prompt "自选角度生成一张组会使用的图片"
 jpgcli chart experiment.xlsx --sheet Sheet1 --prompt "比较不同实验组结果，生成适合组会展示的科研风格图"
 ```
 
-## 示例
+## 示例 / Example
 
-提示词：
+提示词/Prompt：
 
 自选角度生成一张组会使用的图片，注意标题尽可能简洁
+Generate a chart for a research group meeting.
+Choose the perspective automatically and keep the title concise.
 
-生成结果：
+生成结果/Output：
 
 ![example](output/examples_20260308_204701.png)
