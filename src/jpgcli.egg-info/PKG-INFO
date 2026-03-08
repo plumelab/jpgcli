@@ -1,0 +1,179 @@
+Metadata-Version: 2.4
+Name: jpgcli
+Version: 0.1.0
+Summary: Generate research-style charts from tabular data with an AI-guided CLI.
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: matplotlib>=3.8
+Requires-Dist: openai>=1.40.0
+Requires-Dist: openpyxl>=3.1
+Requires-Dist: pandas>=2.2
+Requires-Dist: pydantic>=2.7
+Requires-Dist: python-dotenv>=1.0
+Requires-Dist: seaborn>=0.13
+Requires-Dist: typer>=0.12
+Provides-Extra: dev
+Requires-Dist: pytest>=8.2; extra == "dev"
+
+# jpgcli
+
+中文 | English
+
+`jpgcli` 是一个面向组会、周报和阶段汇报的 Python CLI：把 `Excel/CSV` 数据和一句自然语言提示词交给它，就能生成一张适合直接放进 PPT 的科研风格图表。
+
+`jpgcli` is a Python CLI for weekly reports, lab meetings, and slide decks. Feed it `Excel/CSV` data plus a natural-language prompt, and it generates a polished research-style chart for presentation use.
+
+## Features / 功能特性
+
+- 图表优先：专注生成适合汇报的静态图表 PNG
+- 固定模板映射：风格稳定，不依赖模型直接写代码
+- OpenAI 兼容：支持 `OPENAI_API_KEY`、`OPENAI_BASE_URL`、`OPENAI_MODEL`
+- 首次运行初始化引导：缺少配置时自动询问并写入 `.env`
+- 调试友好：可输出 AI 生成的 `ChartSpec` JSON
+
+## Typical Use Cases / 典型场景
+
+- 把一周实验数据快速做成组会趋势图
+- 把分类汇总数据做成周报对比图
+- 用自然语言描述“想要什么图”，而不是手写绘图代码
+
+## Installation / 安装
+
+### Requirements / 环境要求
+
+- Python `3.10+`
+
+### Install / 安装命令
+
+```bash
+python3 -m pip install -e .
+```
+
+开发依赖：
+
+```bash
+python3 -m pip install -e '.[dev]'
+```
+
+## First Run / 首次运行
+
+第一次执行 `jpgcli chart ...` 时，如果发现本地缺少配置，程序会自动进入初始化引导：
+
+When you run `jpgcli chart ...` for the first time, `jpgcli` will automatically start an interactive setup if configuration is missing.
+
+```bash
+jpgcli chart data.csv --prompt "按周展示实验结果趋势"
+```
+
+引导会询问：
+
+- 是否使用自定义 API 地址
+- `OPENAI_API_KEY`
+- `OPENAI_MODEL`
+- 是否写入当前项目根目录的 `.env`
+
+也可以手动执行初始化：
+
+```bash
+jpgcli init
+```
+
+检查当前配置状态：
+
+```bash
+jpgcli init --check
+```
+
+## Configuration / 配置方式
+
+推荐使用项目根目录下的 `.env` 文件。你可以参考 `.env.example`：
+
+```env
+OPENAI_API_KEY=your_api_key_here
+OPENAI_BASE_URL=https://api.openai.com/v1
+OPENAI_MODEL=gpt-4.1-mini
+```
+
+`OPENAI_BASE_URL` 是可选项；如果你使用默认 OpenAI 官方地址，可以不设置。
+
+## Quick Start / 快速开始
+
+```bash
+jpgcli chart weekly_data.csv --prompt "生成一张适合周报展示的趋势图" --output weekly_report.png
+```
+
+更多参数：
+
+```bash
+jpgcli chart data.xlsx \
+  --sheet Sheet1 \
+  --prompt "比较不同实验组的结果" \
+  --theme report \
+  --title "Weekly Experiment Summary" \
+  --debug-json
+```
+
+## CLI Reference / 命令说明
+
+### `jpgcli chart`
+
+- `--prompt`：自然语言图表需求
+- `--output`：输出 PNG 路径
+- `--sheet`：Excel sheet 名称或索引
+- `--theme`：`paper` / `report`
+- `--title`：覆盖 AI 自动生成标题
+- `--dpi`：导出分辨率
+- `--width` / `--height`：图尺寸
+- `--debug-json`：保存生成的 JSON 规范
+
+### `jpgcli init`
+
+- 启动初始化引导
+- 把配置写入当前项目根目录 `.env`
+
+### `jpgcli init --check`
+
+- 检查配置是否完整
+- 仅显示掩码后的 key 信息，不泄露完整密钥
+
+## How It Works / 工作原理
+
+`jpgcli` follows a constrained pipeline:
+
+1. 读取 `Excel/CSV`
+2. 生成表格摘要
+3. 让 AI 输出受约束的 `ChartSpec` JSON
+4. 使用固定模板渲染图表
+5. 导出为 `PNG`
+
+这种方式比“让 AI 直接生成 Python 绘图代码”更稳定，也更适合做成可维护的 CLI 产品。
+
+## Development / 开发说明
+
+运行测试：
+
+```bash
+pytest
+```
+
+如果本机没有安装 `pytest`，请先安装开发依赖：
+
+```bash
+python3 -m pip install -e '.[dev]'
+```
+
+更多设计细节见 `PROJECT_GUIDE.md`。
+
+## Current Limitations / 当前限制
+
+- 第一版以 `Excel/CSV` 为主，不推荐仅靠纯文本直接生成图表
+- 当前只支持单图输出
+- 当前图型主要为 `bar`、`grouped_bar`、`line`、`scatter`
+- 初始化阶段不做在线连通性检测
+
+## Roadmap / 路线图
+
+- 增加更多图型：`area`、`boxplot`、`heatmap`
+- 支持多图拼板
+- 支持表格导出
+- 增加配置文件与 Web UI

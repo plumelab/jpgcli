@@ -1,0 +1,2 @@
+[console_scripts]
+jpgcli = jpgcli.cli.app:app
